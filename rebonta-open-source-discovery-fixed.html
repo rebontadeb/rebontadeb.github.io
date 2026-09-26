@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rebonta Deb | Open Source Solutions Architect</title>
+<meta name="description" content="Solutions Architect focused on open source, Linux, Kubernetes, hybrid cloud, virtualization, automation and cloud native architecture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap">
+<style>
+:root{
+ --red:#e60023;--red2:#cc001f;--ink:#000;--body:#33332e;--mute:#62625b;
+ --hair:#dadad3;--soft:#fbfbf9;--card:#f6f6f3;--secondary:#e5e5e0;--dark:#262622;
+ --r:16px;--rl:32px;--pill:9999px;
+ --bg:#ffffff;--nav-bg:rgba(255,255,255,.97);--pin-bg:#f6f6f3;--pin-white:#ffffff;
+ --nodes-pill:#fff;--nodes-pill-text:#000;
+}
+body.dark{
+ --ink:#f0f4f8;--body:#c8d8e8;--mute:#8a9aaa;
+ --hair:#1e2d3e;--soft:#0f1520;--card:#161f2e;--secondary:#1a2a3a;--dark:#0a0f1a;
+ --bg:#0f1520;--nav-bg:rgba(15,21,32,.97);--pin-bg:#161f2e;--pin-white:#1e2d3e;
+ --nodes-pill:rgba(255,255,255,.1);--nodes-pill-text:#e0ecf8;
+}
+
+/* theme toggle button */
+.theme-btn{
+ min-height:40px;border:1px solid var(--hair);border-radius:var(--pill);
+ padding:0 14px;font:700 13px Inter;display:inline-flex;align-items:center;
+ gap:6px;cursor:pointer;background:var(--card);color:var(--ink);
+ transition:background .15s,border-color .15s;
+}
+.theme-btn:hover{border-color:var(--ink)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;transition:background .2s,color .2s}
+a{color:inherit}.wrap{width:min(1280px,calc(100% - 48px));margin:auto}
+
+/* nav */
+.nav-shell{position:sticky;top:0;z-index:30;background:var(--nav-bg);border-bottom:1px solid var(--hair)}
+.nav{height:64px;display:grid;grid-template-columns:auto minmax(260px,560px) auto;gap:20px;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;white-space:nowrap}
+.logo-mark{width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:700 14px Manrope}
+.search{height:48px;border-radius:var(--pill);background:var(--card);display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--mute)}
+.search input{width:100%;border:0;outline:0;background:transparent;font:500 15px Inter;color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.btn{min-height:40px;border:0;border-radius:var(--r);padding:0 14px;font:700 14px Inter;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer}
+.primary{background:var(--red);color:#fff}.primary:active{background:var(--red2)}
+.secondary{background:var(--secondary);color:var(--ink)}.ghost{background:transparent;color:var(--ink)}
+
+/* hero */
+.hero{background:var(--soft);padding:64px 0 56px}
+.hero-inner{text-align:center;max-width:950px;margin:auto}
+.kicker{color:var(--red);font-size:14px;font-weight:700;margin-bottom:16px}
+h1{font:600 clamp(44px,6.4vw,70px)/1.1 Manrope,Inter,sans-serif;letter-spacing:-1.2px;margin:0}
+.hero p{max-width:720px;margin:24px auto 0;color:var(--body);font-size:18px;line-height:1.5}
+.hero-actions,.chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:26px}
+.hero-actions .btn{min-height:44px;padding:0 18px}
+.chip{border:0;border-radius:var(--pill);background:var(--pin-bg);color:var(--ink);padding:10px 16px;font:700 14px Inter;cursor:pointer}
+.chip.active{background:#000;color:#fff}
+
+/* common */
+.section{padding:64px 0;background:var(--bg)}
+.section-title{text-align:center;max-width:720px;margin:0 auto 32px}
+.section-title h2{font:700 44px/1.15 Manrope;letter-spacing:-.8px;margin:0 0 12px}
+.section-title p{color:var(--mute);line-height:1.5;margin:0}
+
+/* masonry */
+.masonry{columns:4;column-gap:8px}
+.pin{display:inline-block;width:100%;vertical-align:top;break-inside:avoid;margin:0 0 8px;border-radius:var(--r);overflow:hidden;background:var(--pin-bg)}
+.pin.large{border-radius:var(--rl)}
+.pin-body{padding:24px}
+.pin h3{font:700 28px/1.2 Manrope;letter-spacing:-1.2px;margin:0 0 12px}
+.pin p{font-size:14px;line-height:1.55;color:var(--body);margin:0}
+.meta{font-size:12px;color:var(--mute);font-weight:600;margin-bottom:18px}
+.pin.red{background:var(--red);color:#fff}.pin.dark{background:var(--dark);color:#fff}
+.pin.red p,.pin.red .meta,.pin.dark p,.pin.dark .meta{color:rgba(255,255,255,.78)}
+.hero-pin{min-height:430px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.giant{font:700 clamp(28px,3.8vw,58px)/.88 Manrope;letter-spacing:-2px;word-break:break-word;overflow-wrap:break-word;width:100%}
+.nodes{min-height:330px;padding:24px;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:8px}
+.nodes span{padding:11px 15px;border-radius:var(--pill);background:var(--nodes-pill);font-size:13px;font-weight:700;color:var(--nodes-pill-text)}
+.nodes span:first-child{background:var(--ink);color:var(--bg)}
+.pin.dark .nodes span{background:rgba(255,255,255,.12);color:#fff}
+.pin.dark .nodes span:first-child{background:#fff;color:#000}
+.pin-label{display:inline-block;margin:0 16px 16px;background:var(--pin-white);border-radius:var(--pill);padding:8px 14px;font-size:12px;font-weight:700;color:var(--ink)}
+.short{min-height:200px}.mid{min-height:280px}
+
+/* editorial feature rows */
+.features{background:var(--soft);padding:64px 0}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin-bottom:64px}
+.feature:last-child{margin:0}
+.feature:nth-child(even) .copy{order:2}
+.feature:nth-child(even) .board{order:1}
+.copy{padding:32px}
+.copy h2{font:700 44px/1.15 Manrope;letter-spacing:-.8px;margin:0 0 16px}
+.copy p{line-height:1.6;color:var(--body)}
+.board{background:var(--card);border-radius:var(--rl);padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini{
+  border-radius:var(--r);height:235px;
+  perspective:800px;cursor:default;position:relative;
+}
+.mini-front,.mini-back{
+  position:absolute;inset:0;
+  border-radius:var(--r);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:20px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition:transform .45s ease;
+  overflow:hidden;
+}
+.mini-front{transform:rotateY(0deg)}
+.mini-back{transform:rotateY(180deg);font-size:4.5rem;line-height:1}
+.mini-back svg{max-width:90%;max-height:180px;width:auto;height:auto}
+.mini:hover .mini-front{transform:rotateY(-180deg)}
+.mini:hover .mini-back{transform:rotateY(0deg)}
+.mini:hover{box-shadow:0 10px 30px rgba(0,0,0,.15);z-index:2}
+.mini b{font:700 20px/1.15 Manrope;color:var(--ink)}
+.mini span{font-size:12px;color:var(--mute);margin-top:6px}
+
+/* experience */
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.job{background:var(--pin-bg);border-radius:var(--r);padding:32px;min-height:320px;transition:transform .2s ease,box-shadow .2s ease}
+.job:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.period{font-size:12px;color:var(--mute);font-weight:600}.company{font-weight:700;margin-top:36px}
+.job h3{font:700 22px/1.25 Manrope;margin:8px 0 12px}
+.job p{font-size:14px;line-height:1.55;color:var(--body)}
+.tags{display:flex;flex-wrap:nowrap;gap:6px;margin-top:20px;overflow:hidden}
+.tags span{background:var(--pin-white);border-radius:var(--pill);padding:7px 10px;font-size:12px;font-weight:700;color:var(--ink)}
+
+/* credentials */
+.certs{background:var(--soft)}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cert{background:var(--pin-white);border-radius:var(--r);padding:24px;display:flex;gap:16px;align-items:center;transition:transform .2s ease,box-shadow .2s ease}
+.cert:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.badge{width:48px;height:48px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.cert b{display:block;font-size:14px}.cert span{color:var(--mute);font-size:12px;margin-top:4px;display:block}
+
+/* cta */
+.cta{background:var(--dark);color:#fff;padding:48px 0}
+.cta-in{display:flex;justify-content:space-between;align-items:center;gap:32px}
+.cta h2{font:700 28px/1.2 Manrope;letter-spacing:-1.2px;margin:0}
+.cta p{color:rgba(255,255,255,.7);margin:8px 0 0}
+footer{padding:32px 0;color:var(--mute);font-size:14px}
+.footer{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-links a{text-decoration:none;margin-left:16px}
+
+/* responsive */
+@media(max-width:1024px){.masonry{columns:3}}
+@media(max-width:768px){
+ .wrap{width:calc(100% - 32px)}
+ .nav{grid-template-columns:auto 1fr auto}.search{width:48px;justify-self:end;padding:0;justify-content:center}.search input{display:none}
+ .nav-actions .ghost,.nav-actions .secondary{display:none}
+ .masonry{columns:2}
+ .feature{grid-template-columns:1fr}.feature:nth-child(even) .copy,.feature:nth-child(even) .board{order:initial}
+ .timeline,.cert-grid{grid-template-columns:1fr}
+ .cta-in{flex-direction:column;align-items:flex-start}
+ .giant{font-size:52px}
+}
+@media(max-width:480px){
+ .wrap{width:calc(100% - 24px)}.hero,.section,.features{padding:32px 0}
+ .masonry{columns:1;column-gap:6px}.pin{margin-bottom:6px}
+ .section-title h2,.copy h2{font-size:36px}.feature{gap:16px;margin-bottom:32px}.copy{padding:16px 4px}
+ .giant{font-size:44px}
+}
+</style>
+<style id="podman-exact-logo-style">
+.podman-exact-logo{display:block!important;width:68px!important;height:68px!important;max-width:68px!important;max-height:68px!important}
+</style>
+
+<style id="gitops-exact-logo-style">
+.mini-back .gitops-exact-logo{
+  display:block;
+  width:118px;
+  height:auto;
+  max-width:68%;
+  max-height:96px;
+}
+</style>
+</head>
+<body>
+
+<header class="nav-shell">
+ <div class="wrap nav">
+  <a class="logo" href="#top"><span class="logo-mark">RD</span>Rebonta Deb</a>
+  <label class="search">⌕ <input id="search" placeholder="Search skills, ideas, technologies..."></label>
+  <div class="nav-actions">
+   <button class="theme-btn" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">☾</span><span id="themeLabel">Dark</span></button>
+   <a class="btn ghost" href="#journey">Journey</a>
+   <a class="btn secondary" href="#credentials">Credentials</a>
+   <a class="btn primary" href="mailto:rebontadeb@gmail.com">Connect</a>
+  </div>
+ </div>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="wrap hero-inner">
+  <div class="kicker">Open source · Cloud native · Architecture</div>
+  <h1>I build open systems<br>teams can evolve.</h1>
+  <p>Solutions Architect with 11+ years across Linux, Kubernetes, automation, virtualization and hybrid cloud. I prefer technology that stays understandable, portable and open.</p>
+  <div class="hero-actions"><a class="btn primary" href="#discover">Explore my work</a><a class="btn secondary" href="#journey">My journey</a></div>
+  <div class="chips">
+   <button class="chip active" data-filter="all">All</button><button class="chip" data-filter="platform">Platforms</button><button class="chip" data-filter="automation">Automation</button><button class="chip" data-filter="cloud">Hybrid cloud</button><button class="chip" data-filter="sre">SRE</button>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="discover">
+ <div class="wrap">
+  <div class="section-title"><h2>Ideas I build around</h2><p>A discovery board of the technologies, principles and engineering work that shape how I approach open infrastructure.</p></div>
+  <div class="masonry">
+   <article class="pin large red searchable" data-tags="platform open source kubernetes"><div class="hero-pin"><div class="meta">OPEN BY DESIGN</div><div class="giant">OPEN<br>SOURCE</div><p>Not just a toolset. A way to keep architecture inspectable, portable and adaptable.</p></div></article>
+   <article class="pin searchable" data-tags="platform kubernetes openshift"><div class="nodes"><span>Kubernetes</span><span>Linux</span><span>Helm</span><span>Operators</span><span>OpenShift</span><span>OCI</span><span>Service Mesh</span></div><span class="pin-label">Cloud native foundations</span></article>
+   <article class="pin short searchable" data-tags="automation gitops"><div class="pin-body"><div class="meta">DECLARATIVE OPERATIONS</div><h3>GitOps over click ops.</h3><p>Argo CD, Tekton, Jenkins and automation patterns that make infrastructure changes repeatable and reviewable.</p></div></article>
+   <article class="pin dark mid searchable" data-tags="platform linux virtualization"><div class="pin-body"><div class="meta">LINUX FIRST</div><h3>Containers. VMs. Cloud native apps.</h3><p>Linux remains the open foundation beneath changing application models.</p></div></article>
+   <article class="pin short searchable" data-tags="cloud hybrid aws azure"><div class="pin-body"><div class="meta">PORTABILITY</div><h3>Cloud is a destination. Architecture is the constant.</h3><p>On premises, AWS and Azure with transferable platform patterns and operational skills.</p></div></article>
+   <article class="pin mid searchable" data-tags="sre observability"><div class="pin-body"><div class="meta">OPERABILITY</div><h3>Design for day two.</h3><p>Prometheus, Grafana, SLOs, SLIs and observability belong in architecture discussions before production.</p></div></article>
+   <article class="pin mid searchable" data-tags="platform virtualization kvm"><div class="pin-body"><div class="meta">MODERNIZATION</div><h3>VMs and containers can share the future.</h3><p>KVM and Kubernetes offer a practical path to modernize without pretending every established workload becomes cloud native overnight.</p></div></article>
+   <article class="pin mid searchable" data-tags="automation ansible python"><div class="pin-body"><div class="meta">AUTOMATION</div><h3>Automate the repeatable.</h3><p>Ansible, Python, Shell, Go and CI/CD pipelines eliminate toil and make operations reproducible. If you do it twice, automate it.</p></div></article>
+   <article class="pin dark mid searchable" data-tags="architecture workshop poc"><div class="pin-body"><div class="meta">ARCHITECTURE</div><h3>Understand it.<br>Test it.<br>Operate it.</h3><p>Workshops and proof of concepts turn technical choices into evidence teams can validate themselves.</p></div></article>
+   <article class="pin mid dark searchable" data-tags="platform cloud devops"><div class="nodes" style="min-height:0;padding:20px 20px 8px"><span>Pre-sales</span><span>Solution Design</span><span>RFP / RFI</span><span>BoQ</span><span>Workshops</span><span>POC</span><span>Architecture Review</span><span>Hybrid Cloud</span><span>OpenShift</span><span>AWS</span><span>Azure</span></div><span class="pin-label" style="background:rgba(255,255,255,.15);color:#fff">Engagement toolkit</span></article>
+   <article class="pin red short searchable" data-tags="open source philosophy"><div class="pin-body"><div class="meta">WHY OPEN?</div><h3>Architecture should preserve choice.</h3></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="features">
+ <div class="wrap">
+  <div class="feature">
+   <div class="copy"><div class="kicker">Platform engineering</div><h2>Build a platform, not a collection of products.</h2><p>I look at compute, networking, storage, security, lifecycle, automation and observability as one operating environment. Kubernetes is the control plane. Open standards keep the edges flexible.</p></div>
+   <div class="board">
+     <div class="mini" style="background:#dce7ff"><div class="mini-front"><b>OpenShift</b><span>Container platform</span></div><div class="mini-back" style="color:#2563eb"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="72" height="72" viewBox="0 -9.5 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+	<g>
+		<path d="M74.8392681,106.892926 L33.9714147,121.763314 C34.4958336,128.315376 35.6233978,134.787442 37.211892,141.128721 L76.0290516,126.992265 C74.7846677,120.440203 74.3402448,113.672278 74.8481566,106.891656" fill="#DA2430">
+
+</path>
+		<path d="M255.444071,61.7023618 C252.593416,55.8232827 249.297068,50.1410194 245.477572,44.7863591 L204.621146,59.656747 C209.37647,64.5200025 213.363578,69.9864033 216.628181,75.8324681 L255.445341,61.6998222 L255.444071,61.7023618 L255.444071,61.7023618 Z" fill="#DA2430">
+
+</path>
+		<g>
+			<path d="M182.950275,61.4614413 C177.809695,57.0005792 172.004032,53.1510662 165.54165,50.1365752 L165.53911,50.1365752 C127.598099,32.4485466 82.3304594,48.904889 64.6424308,86.8585985 C63.6454901,89.0001513 62.7625611,91.1647155 61.9886006,93.3462151 C59.7809164,99.7692657 58.4912936,106.33609 57.9978533,112.89241 L57.8539295,112.9456 C57.8501633,112.993635 57.8464406,113.04167 57.8427616,113.089704 L33.2472215,122.039512 L17.4207366,127.888513 C17.418462,127.859314 17.416198,127.830115 17.4139447,127.800914 L16.9799873,127.958822 C15.443554,108.523577 18.7195851,88.4470927 27.5331247,69.5476944 C28.6870135,67.0724846 29.9171924,64.6566205 31.2195686,62.3015921 C60.2738161,8.1856616 126.383568,-14.4341613 182.138317,11.9725342 C193.678037,17.4404824 203.911047,24.6094357 212.694536,33.045511 C218.60401,38.5121214 223.878405,44.5334969 228.475731,50.9860576 L187.616767,65.858985 C187.406509,65.6440827 187.194925,65.4302535 186.982018,65.2175172 L186.868906,65.2593348 C185.610426,63.9523602 184.30416,62.6849771 182.950275,61.4614413 Z" fill="#DA2430">
+
+</path>
+			<path d="M19.2613217,193.896477 L19.1968952,193.91993 C10.6957214,181.949719 4.50808591,168.501485 0.938735714,154.347253 L39.7635139,140.206988 L39.7660535,140.209528 C39.7740514,140.251306 39.7820838,140.293077 39.7901508,140.334841 L40.04226,140.241601 L40.0481026,140.257181 C42.0422662,150.817822 46.1933636,160.892394 52.2458245,169.750695 C54.5535333,173.043912 57.1321413,176.165653 59.9682455,179.077478 L59.8140535,179.133611 C59.9116663,179.236598 60.0095901,179.33933 60.1078243,179.441803 L19.6202948,194.412587 C19.500171,194.240851 19.380513,194.068813 19.2613217,193.896477 Z" fill="#E82429">
+
+</path>
+			<path d="M173.465486,183.446858 C152.413934,196.46429 125.412387,198.979252 101.351883,187.758961 C92.8405513,183.78963 85.425039,178.421002 79.2335941,172.064486 L38.4622439,186.908208 C38.5659908,187.054117 38.6700845,187.199805 38.7745245,187.345272 L38.754348,187.352733 C49.9644215,203.36935 65.2565512,216.75678 84.0211549,225.651222 C124.490455,244.814382 170.407927,238.152298 203.655476,212.3668 C218.543486,201.215294 230.971995,186.351361 239.368027,168.347841 C248.186646,149.452252 251.443631,129.383387 249.883072,109.963379 L248.747464,110.376585 C248.73211,110.168574 248.716217,109.960636 248.699785,109.752771 L208.210308,124.709923 L208.212255,124.713818 C207.567618,133.637473 205.349363,142.590341 201.405583,151.173176 C195.091199,164.926539 185.242012,175.882135 173.465486,183.446858 Z" fill="#DA2430">
+
+</path>
+			<path d="M218.552379,75.1291912 L219.159486,74.9081957 L219.159486,74.9069259 C225.546477,88.0491438 229.444701,102.334163 230.612897,116.962023 L189.840277,131.795587 C189.847816,131.694429 189.855149,131.593274 189.862274,131.492123 L189.091251,131.776983 C190.201352,116.689345 186.816517,101.683505 179.657339,88.6544234 L218.205113,74.4042308 L218.20706,74.4003358 C218.32299,74.6428972 218.438097,74.8858507 218.552379,75.1291912 Z" fill="#E82429">
+
+</path>
+		</g>
+		<path d="M74.8906707,106.654031 L34.309659,121.650133 C34.8296537,128.260104 35.9494925,134.786331 37.5289522,141.182071 L76.0747786,126.924088 C74.8283493,120.302432 74.3804137,113.486022 74.9062511,106.650136" fill="#C22035">
+
+</path>
+		<path d="M254.22692,61.0828228 C251.397136,55.1544934 248.121364,49.4248137 244.329492,44.0242691 L203.758218,59.0203718 C208.479069,63.9262397 212.43843,69.4377942 215.679146,75.334963 L254.221077,61.0789277 L254.22692,61.0828228 L254.22692,61.0828228 Z" fill="#C22035">
+
+</path>
+		<path d="M34.3084904,121.652665 L74.7901774,106.824052 L74.624636,114.957003 L35.5685526,129.705767 L34.3026478,121.642928 L34.3084904,121.652665 L34.3084904,121.652665 Z" fill="#AC223B">
+
+</path>
+		<path d="M203.766009,58.8974817 L244.8787,44.7894599 L249.151615,51.2377841 L209.205504,65.3594386 L203.771851,58.8935866 L203.766009,58.8974817 L203.766009,58.8974817 Z" fill="#AC223B">
+
+</path>
+		<path d="M38.7638909,187.20102 L79.2942665,172.452256 L91.5521198,184.016782 L49.0488803,199.973025 L38.7658385,187.197125 L38.7638909,187.20102 L38.7638909,187.20102 Z" fill="#B92135">
+
+</path>
+		<path d="M249.380647,109.861639 L208.215371,124.705833 L205.183043,141.184018 L249.074882,125.54133 L249.38649,109.863587 L249.380647,109.861639 L249.380647,109.861639 Z" fill="#B92135">
+
+</path>
+	</g>
+</svg></div></div>
+     <div class="mini" style="background:#f3e5d0"><div class="mini-front"><b>AWS</b><span>Public cloud</span></div><div class="mini-back" style="color:#c2410c"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" width="62" height="62"><g clip-path="url(#a)"><path fill="#252f3e" d="M28.181 41.718c0 1.23.133 2.228.366 2.96.266.732.599 1.53 1.064 2.395.167.266.233.532.233.765 0 .332-.2.665-.632.998l-2.095 1.396c-.3.2-.599.3-.865.3-.332 0-.665-.166-.997-.466a10.3 10.3 0 0 1-1.198-1.563 26 26 0 0 1-1.03-1.962q-3.893 4.59-9.779 4.59c-2.794 0-5.022-.799-6.652-2.395S4.135 45.01 4.135 42.35c0-2.827.998-5.122 3.027-6.851s4.722-2.595 8.148-2.595c1.13 0 2.295.1 3.525.267 1.231.166 2.495.432 3.825.731v-2.428c0-2.527-.532-4.29-1.563-5.321-1.064-1.031-2.86-1.53-5.421-1.53-1.164 0-2.361.133-3.592.432-1.23.3-2.428.666-3.592 1.131a10 10 0 0 1-1.164.433c-.233.066-.4.1-.532.1-.466 0-.699-.333-.699-1.032v-1.63c0-.531.067-.93.233-1.163s.466-.466.931-.699q1.746-.898 4.191-1.497c1.63-.432 3.36-.631 5.188-.631 3.958 0 6.852.898 8.714 2.694 1.83 1.796 2.76 4.523 2.76 8.181v10.776zm-13.503 5.055c1.098 0 2.229-.2 3.426-.598 1.197-.4 2.261-1.131 3.16-2.129.532-.632.93-1.33 1.13-2.128s.333-1.763.333-2.894v-1.397a28 28 0 0 0-3.06-.565 25 25 0 0 0-3.126-.2c-2.229 0-3.858.433-4.956 1.33-1.098.899-1.63 2.163-1.63 3.825 0 1.564.4 2.728 1.23 3.526.8.831 1.963 1.23 3.493 1.23m26.707 3.592c-.599 0-.998-.1-1.264-.332-.266-.2-.499-.665-.698-1.297l-7.816-25.71c-.2-.665-.3-1.097-.3-1.33 0-.532.267-.831.799-.831h3.26c.631 0 1.063.1 1.296.332.266.2.466.666.666 1.297l5.587 22.018 5.188-22.018c.167-.665.366-1.097.632-1.297s.732-.332 1.33-.332h2.661c.632 0 1.065.1 1.33.332.267.2.5.666.633 1.297l5.255 22.284 5.753-22.284c.2-.665.433-1.097.665-1.297.267-.2.699-.332 1.298-.332h3.093c.532 0 .831.266.831.831 0 .166-.033.333-.066.532-.034.2-.1.466-.233.832L63.27 48.769q-.3.998-.699 1.297c-.266.2-.698.333-1.264.333h-2.86c-.632 0-1.064-.1-1.33-.333-.267-.233-.5-.665-.632-1.33L51.33 27.284l-5.122 21.419c-.167.665-.366 1.097-.632 1.33s-.732.332-1.33.332zm42.738.898c-1.73 0-3.46-.2-5.122-.598-1.663-.4-2.96-.832-3.825-1.33-.532-.3-.898-.633-1.03-.932-.134-.3-.2-.632-.2-.931v-1.696c0-.699.266-1.031.765-1.031q.3 0 .598.1c.2.066.5.199.832.332a18 18 0 0 0 3.658 1.164c1.33.266 2.628.4 3.958.4 2.095 0 3.725-.367 4.856-1.098s1.73-1.796 1.73-3.16c0-.931-.3-1.696-.899-2.328-.598-.632-1.73-1.197-3.359-1.73l-4.822-1.496c-2.428-.765-4.224-1.896-5.322-3.393-1.097-1.463-1.663-3.093-1.663-4.822q0-2.096.898-3.692a8.55 8.55 0 0 1 2.395-2.727c.998-.765 2.128-1.33 3.459-1.73S83.757 20 85.22 20c.732 0 1.497.033 2.229.133.765.1 1.463.233 2.162.366.665.166 1.297.332 1.895.532q.899.3 1.397.599c.466.266.798.532.998.831q.3.399.3 1.098v1.563c0 .698-.267 1.064-.766 1.064-.266 0-.698-.133-1.264-.399q-2.843-1.297-6.385-1.297c-1.896 0-3.393.3-4.424.931-1.03.632-1.563 1.597-1.563 2.96 0 .931.333 1.73.998 2.362s1.896 1.264 3.658 1.829l4.723 1.497c2.395.764 4.124 1.829 5.155 3.192s1.53 2.927 1.53 4.657c0 1.43-.3 2.727-.864 3.858-.6 1.13-1.397 2.128-2.428 2.926-1.031.832-2.262 1.43-3.692 1.863-1.497.466-3.06.698-4.756.698"/><path fill="#f90" fill-rule="evenodd" d="M90.409 67.427C79.466 75.51 63.569 79.8 49.899 79.8c-19.157 0-36.418-7.085-49.456-18.858-1.03-.932-.1-2.195 1.131-1.464 14.102 8.182 31.496 13.138 49.49 13.138 12.139 0 25.476-2.528 37.748-7.716 1.83-.832 3.393 1.197 1.597 2.527" clip-rule="evenodd"/><path fill="#f90" fill-rule="evenodd" d="M94.965 62.239c-1.397-1.796-9.246-.865-12.804-.433-1.065.134-1.231-.798-.267-1.496 6.253-4.39 16.53-3.127 17.727-1.663 1.198 1.497-.332 11.774-6.186 16.696-.898.765-1.762.366-1.363-.632 1.33-3.293 4.29-10.71 2.893-12.472" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h100v100H0z"/></clipPath></defs></svg></div></div>
+     <div class="mini" style="background:#dcebdc"><div class="mini-front"><b>Ansible</b><span>Automation engine</span></div><div class="mini-back" style="color:#15803d"><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="60" height="60" viewBox="-29.5 0 315 315" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+	<g>
+		<g transform="translate(0.000000, 281.859985)" fill="#1A1918">
+			<path d="M67.516834,32.0035248 C66.9753105,32.0035248 66.3906671,31.8666739 65.9847187,31.3176926 L48.6011921,8.45648614 L48.6011921,31.775177 L44.6368825,31.775177 L44.6368825,3.06093065 C44.6368825,1.91840275 45.5828006,1.00382829 46.6646822,1.00382829 C47.2943879,1.00382829 47.8355229,1.18642767 48.239529,1.73540898 L65.5791587,24.5512613 L65.5791587,1.323673 L69.5430798,1.323673 L69.5430798,29.9917765 C69.5430798,31.1808416 68.5971618,32.0035248 67.516834,32.0035248">
+
+</path>
+			<path d="M100.306277,32.277976 C96.3435217,32.277976 92.1993517,31.4545041 88.3259436,29.9921314 L89.2722501,26.6994268 C92.8302228,27.8427434 96.7032425,28.665821 100.306277,28.665821 C105.305853,28.665821 107.917907,26.8824205 107.917907,24.3682281 C107.917907,22.0815948 105.890496,20.9386725 98.9097372,17.6463622 C91.9289785,14.3544463 89.1825141,12.2515955 89.1825141,8.13581322 C89.1825141,2.9701831 93.1452698,0.865754758 100.620936,0.865754758 C103.729063,0.865754758 108.502551,1.50662733 111.250957,2.32970491 L110.620086,5.71272332 C107.601695,4.98153702 103.819576,4.47869854 100.711449,4.47869854 C95.4430543,4.47869854 93.2808449,5.48398111 93.2808449,7.99935666 C93.2808449,10.4678006 94.8564686,11.5196204 102.242787,14.949176 C110.034666,18.561331 112.016238,20.39048 112.016238,24.1390915 C112.016238,29.5807898 106.881088,32.277976 100.306277,32.277976">
+
+</path>
+			<path d="M130.798131,1.323673 L134.896461,1.323673 L134.896461,31.7747826 L130.798131,31.7747826 L130.798131,1.323673 Z">
+
+</path>
+			<path d="M169.757834,17.9669168 L159.578047,17.9669168 L159.578047,28.3009377 L169.757834,28.3009377 C173.225294,28.3009377 175.342053,26.1058013 175.342053,23.0418388 C175.342053,20.1612645 173.135558,17.9669168 169.757834,17.9669168 M167.775097,4.79846437 L159.578047,4.79846437 L159.578047,14.5377556 L167.775097,14.5377556 C171.063473,14.5377556 173.450217,12.434116 173.450217,9.50818761 C173.450217,6.62761329 171.378132,4.79846437 167.775097,4.79846437 M169.802508,31.7750587 L157.552578,31.7750587 C156.38096,31.7750587 155.480104,30.8600898 155.480104,29.7175619 L155.480104,3.38144581 C155.480104,2.2834832 156.38096,1.32394907 157.552578,1.32394907 L167.685749,1.32394907 C173.900839,1.32394907 177.59361,4.38712277 177.59361,9.1883429 C177.59361,11.7940322 176.062271,14.2175165 173.719813,15.6349294 C177.189215,16.6867492 179.529731,19.5669291 179.529731,23.0418388 C179.529731,27.888413 175.522302,31.7750587 169.802508,31.7750587">
+
+</path>
+			<path d="M199.212246,31.7750981 C198.088022,31.7750981 197.186778,30.8147752 197.186778,29.7176013 L197.186778,1.32398851 L201.284331,1.32398851 L201.284331,28.0718406 L217.588307,28.0718406 L217.588307,31.7750981 L199.212246,31.7750981 Z">
+
+</path>
+			<path d="M245.526181,32.277976 C237.148883,32.277976 232.104634,29.1690539 232.104634,22.9050667 C232.104634,19.9329955 233.771547,17.0981697 237.014473,15.7722536 C234.40203,14.1260985 233.051329,11.7941111 233.051329,9.23377583 C233.051329,3.56451846 237.421198,0.865754758 245.617083,0.865754758 C248.364713,0.865754758 252.237344,1.18638824 255.480658,1.91836331 L255.029647,5.30138173 C251.607638,4.75240042 248.408609,4.43334448 245.301259,4.43334448 C239.986637,4.43334448 237.148883,5.89571709 237.148883,9.4167696 C237.148883,12.2062414 239.761714,14.4005891 243.230339,14.4005891 L250.255383,14.4005891 C251.246364,14.4005891 252.011644,15.1779182 252.011644,16.1378468 C252.011644,17.1435237 251.246364,17.9208529 250.255383,17.9208529 L242.69037,17.9208529 C238.725672,17.9208529 236.204907,19.8864583 236.204907,22.9050667 C236.204907,27.3399049 240.303238,28.665821 245.437222,28.665821 C248.229914,28.665821 252.011644,28.3010166 255.073933,27.5690415 L255.660907,30.9063115 C252.73264,31.7297835 248.903905,32.277976 245.526181,32.277976">
+
+</path>
+			<path d="M14.1379982,7.03469555 L21.3157099,25.0189603 L10.4751393,16.3496305 L14.1379982,7.03469555 Z M26.8894398,29.1623494 L15.8495854,2.18772698 C15.5345384,1.41039785 14.9036674,0.99866187 14.1379982,0.99866187 C13.372329,0.99866187 12.6967842,1.41039785 12.3817372,2.18772698 L0.263885888,31.7751375 L4.40844431,31.7751375 L9.20601639,19.5768676 L23.5202622,31.3176531 C24.0959709,31.7897297 24.5112425,32.0034854 25.0523775,32.0034854 C26.1327053,32.0034854 27.0786234,31.1808022 27.0786234,29.9921314 C27.0786234,29.7992781 27.0106416,29.492448 26.8894398,29.1623494 L26.8894398,29.1623494 Z">
+
+</path>
+		</g>
+		<g>
+			<path d="M255.878566,127.868028 C255.878566,198.323171 198.768494,255.43274 128.312347,255.43274 C57.8622265,255.43274 0.746127325,198.323171 0.746127325,127.868028 C0.746127325,57.4179077 57.8622265,0.301808544 128.312347,0.301808544 C198.768494,0.301808544 255.878566,57.4179077 255.878566,127.868028" fill="#1A1918">
+
+</path>
+			<path d="M130.459863,78.228885 L163.47146,159.705138 L113.608007,120.427335 L130.459863,78.228885 Z M189.104342,178.474123 L138.32577,56.2720498 C136.876246,52.7476854 133.977698,50.8827909 130.459863,50.8827909 C126.935499,50.8827909 123.826002,52.7476854 122.376477,56.2720498 L66.6436045,190.312411 L85.708924,190.312411 L107.771234,135.047143 L173.610097,188.23707 C176.258016,190.378208 178.168617,191.346566 180.652297,191.346566 C185.626186,191.346566 189.973756,187.617782 189.973756,182.235555 C189.973756,181.359612 189.664363,179.969354 189.104342,178.474123 L189.104342,178.474123 Z" fill="#FFFFFF">
+
+</path>
+		</g>
+	</g>
+</svg></div></div>
+     <div class="mini" style="background:#ece3f4"><div class="mini-front"><b>Prometheus</b><span>Metrics &amp; SRE</span></div><div class="mini-back" style="color:#7c3aed"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" width="62" height="62"><g clip-path="url(#prom)"><path fill="#e6522c" d="M50 0C22.387 0 0 22.385 0 49.999c0 27.613 22.387 50 50 50 27.614 0 50-22.387 50-50C100 22.384 77.613 0 50 0m0 93.578c-7.856 0-14.226-5.248-14.226-11.72h28.453c0 6.471-6.37 11.72-14.227 11.72m23.498-15.602H26.5v-8.521h46.997zm-.169-12.908H26.635c-.155-.179-.314-.355-.464-.537-4.81-5.841-5.944-8.89-7.044-11.998-.019-.102 5.833 1.195 9.983 2.129 0 0 2.135.494 5.257 1.063-2.997-3.513-4.777-7.98-4.777-12.545 0-10.023 7.687-18.781 4.914-25.86 2.699.22 5.586 5.696 5.78 14.26 2.87-3.966 4.071-11.207 4.071-15.647 0-4.597 3.03-9.937 6.06-10.12-2.702 4.451.699 8.268 3.722 17.734 1.134 3.556.989 9.54 1.864 13.336.29-7.883 1.646-19.383 6.646-23.354-2.206 5 .327 11.257 2.059 14.265 2.794 4.853 4.488 8.53 4.488 15.484 0 4.662-1.721 9.052-4.625 12.483 3.302-.62 5.582-1.178 5.582-1.178l10.722-2.092c.001 0-1.557 6.407-7.544 12.577"/></g><defs><clipPath id="prom"><path fill="#fff" d="M0 0h100v100H0z"/></clipPath></defs></svg></div></div>
+   </div>
+  </div>
+  <div class="feature">
+   <div class="copy"><div class="kicker">Open infrastructure</div><h2>Modernize without throwing away what works.</h2><p>Cloud native does not require pretending virtual machines disappeared. I work across containers, KVM, OpenShift Virtualization and established virtualization environments to create practical transition paths.</p></div>
+   <div class="board">
+     <div class="mini" style="background:#dce7ff"><div class="mini-front"><b>Kubernetes</b><span>Orchestration</span></div><div class="mini-back" style="color:#2563eb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="68" height="68"><g fill="currentColor"><path d="M56.484 55.098c.37.27.82.43 1.31.43 1.2 0 2.18-.95 2.23-2.13l.05-.03.75-13.26c-.9.11-1.8.26-2.7.46-4.93 1.12-9.2 3.55-12.54 6.83l10.87 7.71.03-.01zM55.034 74.528a2.218 2.218 0 00-2.58-1.69l-.02-.03-13.05 2.21a26.15 26.15 0 0010.51 13.15l5.06-12.22-.04-.05c.17-.42.23-.89.12-1.37zM50.694 65.118c.44-.12.85-.38 1.16-.76.75-.94.62-2.29-.28-3.07l.01-.05-9.93-8.88a26.07 26.07 0 00-3.7 16.48l12.73-3.67.01-.05zM60.334 69.018l3.66 1.76 3.66-1.75.9-3.95-2.53-3.16h-4.06l-2.54 3.16zM67.934 53.348c.02.46.18.91.49 1.29.75.94 2.1 1.11 3.06.41l.04.02 10.8-7.66c-4.08-3.99-9.4-6.6-15.15-7.3l.75 13.24h.01zM75.514 72.778c-.17-.03-.34-.05-.51-.04-.29.01-.58.09-.85.22a2.23 2.23 0 00-1.08 2.89l-.02.02 5.11 12.34c4.93-3.14 8.61-7.83 10.54-13.24l-13.16-2.23-.03.04zM65.954 79.318a2.246 2.246 0 00-2.04-1.17c-.77.03-1.5.46-1.89 1.18h-.01l-6.42 11.6a26.16 26.16 0 0014.27.73c.88-.2 1.74-.44 2.57-.72l-6.43-11.63h-.05z"/><path d="M124.544 76.788l-10.44-45.33a8.012 8.012 0 00-4.37-5.43l-42.24-20.18a8.157 8.157 0 00-3.92-.78 8.15 8.15 0 00-3.1.78l-42.24 20.18a8.055 8.055 0 00-4.37 5.43l-10.41 45.34a7.92 7.92 0 001.1 6.14c.14.22.3.43.46.64l29.24 36.35a8.087 8.087 0 006.32 3.01l46.89-.01c2.46 0 4.78-1.11 6.32-3.01l29.23-36.36a7.981 7.981 0 001.53-6.77zm-16.07-.55c-.31 1.35-1.76 2.17-3.26 1.85h-.04l-.05-.02c-.21-.05-.47-.09-.65-.14-.86-.23-1.49-.58-2.27-.88-1.67-.6-3.06-1.1-4.41-1.3-.69-.05-1.04.27-1.42.52-.18-.04-.75-.14-1.08-.19-2.42 7.61-7.58 14.21-14.57 18.33.12.29.33.91.42 1.02-.16.43-.4.83-.19 1.49.49 1.27 1.28 2.52 2.24 4.01.46.69.94 1.22 1.36 2.02.1.19.23.48.33.68.65 1.39.17 2.99-1.08 3.59-1.26.61-2.82-.03-3.5-1.43-.1-.2-.23-.46-.31-.65-.36-.82-.48-1.52-.73-2.32-.57-1.68-1.05-3.07-1.73-4.25-.39-.57-.86-.64-1.29-.78-.08-.14-.38-.69-.54-.97-1.4.53-2.84.97-4.34 1.31-6.56 1.49-13.13.89-18.99-1.37l-.57 1.04c-.43.11-.84.23-1.09.53-.92 1.1-1.29 2.86-1.96 4.54-.25.79-.37 1.5-.73 2.32-.08.19-.22.45-.31.64v.01l-.01.01c-.67 1.39-2.23 2.03-3.49 1.43-1.25-.6-1.72-2.2-1.08-3.59.1-.2.22-.49.32-.68.42-.79.89-1.33 1.36-2.02.96-1.5 1.8-2.84 2.29-4.11.12-.42-.06-1-.22-1.43l.46-1.1c-6.73-3.99-12.04-10.34-14.58-18.21l-1.1.19c-.3-.17-.89-.56-1.45-.51-1.35.2-2.74.7-4.41 1.3-.78.3-1.4.64-2.27.87-.18.05-.44.1-.65.15l-.05.02h-.04c-1.5.32-2.95-.5-3.26-1.85-.31-1.35.65-2.72 2.14-3.08h.04l.02-.01c.21-.05.48-.12.68-.16.88-.17 1.6-.13 2.43-.19 1.77-.19 3.23-.34 4.53-.75.41-.17.81-.74 1.09-1.1l1.06-.31c-1.19-8.22.82-16.28 5.16-22.81l-.81-.72c-.05-.32-.12-1.04-.51-1.46-.99-.93-2.25-1.71-3.76-2.64-.72-.42-1.38-.69-2.1-1.23l-.52-.42-.04-.03c-1.21-.97-1.49-2.64-.62-3.73.49-.61 1.24-.92 2.01-.89.6.02 1.23.24 1.76.66l.56.45c.68.58 1.09 1.16 1.66 1.77 1.25 1.27 2.28 2.32 3.41 3.08.59.35 1.05.21 1.5.15l.91.65c4.3-4.57 9.96-7.95 16.52-9.44 1.53-.35 3.05-.58 4.57-.7l.06-1.07c.34-.33.71-.79.82-1.31.11-1.36-.07-2.82-.28-4.59-.12-.82-.31-1.51-.35-2.4-.01-.18 0-.44.01-.65 0-.02-.01-.05-.01-.07 0-1.55 1.13-2.81 2.53-2.81s2.53 1.26 2.53 2.81c0 .22.01.52.01.72-.03.89-.23 1.58-.35 2.4-.21 1.76-.4 3.23-.29 4.59.1.68.5.95.83 1.26l.06 1.13c8.04.71 15.5 4.39 20.99 10.14l.96-.69c.33.02 1.04.12 1.53-.17 1.13-.76 2.16-1.82 3.41-3.08.57-.61.99-1.18 1.67-1.77l.56-.45c1.21-.97 2.9-.86 3.77.23s.59 2.76-.62 3.73l-.56.45c-.72.53-1.38.8-2.1 1.23-1.51.93-2.77 1.71-3.76 2.64-.47.5-.43.98-.48 1.43l-.9.8a32.75 32.75 0 014.74 10.95c.92 3.99 1.06 7.97.53 11.8l1.02.3c.18.26.56.89 1.09 1.1 1.3.41 2.76.56 4.53.75.83.07 1.55.03 2.43.19l.73.17c1.5.37 2.45 1.74 2.14 3.09z"/><path d="M86.274 52.358l-9.88 8.84.01.03c-.34.3-.6.7-.71 1.18-.27 1.17.44 2.33 1.58 2.65l.01.05 12.79 3.68c.27-2.76.11-5.62-.55-8.48-.66-2.89-1.77-5.56-3.25-7.95z"/></g></svg></div></div>
+     <div class="mini" style="background:#f3e5d0"><div class="mini-front"><b>Podman</b><span>Containerization</span></div><div class="mini-back" style="color:#c2410c"><svg class="podman-exact-logo" role="img" aria-label="Podman logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="68" height="68"><path fill="#3c6eb4" d="M93.188 59.803c.148.927.3 1.854.482 2.76h8.955v-2.76zm1.484 6.896c.185.634.381 1.265.598 1.893.52.259 1.027.548 1.517.87h11.352v-2.763zm-18.431 1.282c-.426.155-.843.336-1.252.533v.004c.41-.198.825-.382 1.252-.537zm-41.248 34.57v2.76H68.15v-2.76zm19.31 6.896v2.752H81.6v-2.752z"/><path fill="#ccc" d="M61.114 16.26c-4.91 0-9.721.567-12.586 1.707-7.89 2.888-13.95 10.775-15.746 20.33-2.365 11.186-2.224 19.941-4.572 28.178a13.589 13.589 0 0 1 3.529-1.94c1.834-.726 4.909-1.09 8.049-1.09 3.14 0 6.35.365 8.431 1.09 4.571 1.67 8.177 5.96 9.67 11.284h9.719c1.991-3.681 5.03-6.523 8.633-7.838 3.919-1.554 13.165-1.55 17.617 0 .483.176.952.39 1.414.619-3.062-8.866-2.673-18.151-5.242-30.303-1.795-9.555-7.857-17.442-15.746-20.33-3.254-1.136-8.261-1.706-13.17-1.707Z"/><path fill="#e7e8e9" d="M45.275 49.787a3.344 3.523 0 0 0-3.34 3.523 3.344 3.523 0 0 0 3.34 3.523 3.344 3.523 0 0 0 3.341-3.523 3.344 3.523 0 0 0-3.34-3.523zm33.79 0a3.344 3.523 0 0 0-3.34 3.523 3.344 3.523 0 0 0 3.34 3.523 3.344 3.523 0 0 0 3.35-3.523 3.344 3.523 0 0 0-3.35-3.523z"/><path fill="#a7a9ac" d="m50.905 50.705-12.428 3.332.356 1.332 12.43-3.332zm23.52 0-.358 1.332 12.427 3.332.358-1.332zm-22.276 2.008L39.65 59.932l.69 1.193 12.497-7.218zm21.039 0-.69 1.194 12.498 7.218.69-1.193zm-20.125 2.395-8.607 8.619c.586.074 1.144.167 1.677.271l7.905-7.916zm19.21 0-.974.974 10.809 10.826c.612-.04 1.237-.067 1.87-.08zm-18.792 3.138-3.957 6.86c.411.203.814.426 1.205.672l3.947-6.844zm18.375 0-1.195.688 5.287 9.168c.098-.039.193-.085.293-.121.31-.123.665-.233 1.037-.336z"/><path fill="#fff" d="M73.261 50.84a10.736 10.217 0 0 1-10.736 10.218A10.736 10.217 0 0 1 51.788 50.84a10.736 10.217 0 0 1 10.737-10.217A10.736 10.217 0 0 1 73.26 50.84Z"/><path fill="#808080" d="M67.107 48.998c-.36-.933-.36-2.799-1.44-2.799s-2.08-.7-3.142-.7c-1.063 0-2.06.7-3.142.7-1.08 0-1.08 1.866-1.44 2.8-.36.932 4.582 3.964 4.582 3.964s4.942-3.032 4.582-3.965z"/><path fill="#3c6eb4" d="M57.399 74.29c.33.886.59 1.81.793 2.761h8.799c.443-.973.958-1.897 1.535-2.762zm44.177.001a19.673 19.673 0 0 1 1.532 2.76h11.072v-2.76z"/><path fill="#ccc" d="M39.789 63.445c-3.14 0-6.216.364-8.05 1.09-5.046 1.844-8.917 6.878-10.065 12.975-.6 2.826-.945 5.391-1.238 7.807h39.086c-.293-2.416-.63-4.98-1.23-7.807-1.147-6.097-5.027-11.13-10.074-12.974-2.082-.725-5.29-1.09-8.43-1.09Z"/><path fill="#e7e8e9" d="M29.663 84.84a2.14 2.248 0 0 0-1.255.477h2.56a2.14 2.248 0 0 0-1.305-.476zm21.62 0a2.14 2.248 0 0 0-1.256.477h2.562a2.14 2.248 0 0 0-1.307-.476z"/><path fill="#a7a9ac" d="m33.202 85.187-.484.13h.52zm15.172 0-.035.13h.52z"/><path fill="#fff" d="M40.698 79a6.868 6.52 0 0 0-6.846 6.317h13.682A6.868 6.52 0 0 0 40.698 79Z"/><path fill="#808080" d="M40.698 82.106c-.68 0-1.317.45-2.008.45-.691 0-.696 1.188-.926 1.783-.08.208.268.583.735.978h4.396c.468-.395.808-.77.727-.978-.23-.595-.226-1.783-.917-1.783-.69 0-1.327-.45-2.007-.45z"/><path fill="#892ca0" d="m91.736 1.467-55.738.164a1.38 1.38 0 0 0-1.073.52L.295 45.883a1.38 1.38 0 0 0-.26 1.16l12.56 54.363a1.38 1.38 0 0 0 .753.935l50.285 24.061a1.38 1.38 0 0 0 1.195-.01l50.148-24.355a1.38 1.38 0 0 0 .744-.943l12.247-54.432a1.38 1.38 0 0 0-.268-1.16L92.82 1.977a1.38 1.38 0 0 0-1.083-.51Zm-.657 2.76 34.05 42.48-11.954 53.142-48.945 23.776-49.091-23.482L2.875 47.07 36.673 4.383Z"/><path fill="#ccc" d="M106.644 95.737c-.606-4.124-.9-8.61-2.019-13.887-1.228-6.518-5.373-11.9-10.768-13.87-4.452-1.55-13.697-1.554-17.616 0-5.395 1.97-9.54 7.352-10.768 13.87-1.118 5.278-1.413 9.763-2.019 13.887"/><path fill="#e7e8e9" d="M74.02 89.688a2.287 2.404 0 0 0-2.286 2.406A2.287 2.404 0 0 0 74.02 94.5a2.287 2.404 0 0 0 2.285-2.406 2.287 2.404 0 0 0-2.285-2.406zm23.11 0a2.287 2.404 0 0 0-2.286 2.406A2.287 2.404 0 0 0 97.13 94.5a2.287 2.404 0 0 0 2.285-2.406 2.287 2.404 0 0 0-2.285-2.406z"/><path fill="#a7a9ac" d="m77.814 90.104-8.5 2.277.358 1.332 8.498-2.277zm16.196 0-.358 1.332 8.5 2.277.358-1.332zm-15.4 1.392-8.544 4.926.688 1.193 8.543-4.924zm14.605 0-.69 1.195 8.543 4.924.69-1.193z"/><path fill="#fff" d="M93.157 90.41a7.343 6.97 0 0 1-7.342 6.97 7.343 6.97 0 0 1-7.343-6.97 7.343 6.97 0 0 1 7.343-6.97 7.343 6.97 0 0 1 7.342 6.97z"/><path fill="#808080" d="M88.948 89.152c-.246-.636-.246-1.91-.985-1.91-.738 0-1.42-.476-2.148-.476-.727 0-1.41.477-2.149.477-.738 0-.738 1.273-.985 1.91-.246.636 3.134 2.704 3.134 2.704s3.38-2.068 3.133-2.705z"/><path fill="#60605b" d="M62.526 39.592c-6.461 0-11.77 5.022-11.77 11.252s5.309 11.252 11.77 11.252c6.462 0 11.771-5.022 11.771-11.252s-5.311-11.252-11.771-11.252zm0 2.069c5.398 0 9.703 4.128 9.703 9.183 0 5.056-4.305 9.182-9.703 9.182-5.397 0-9.703-4.126-9.703-9.182 0-5.055 4.306-9.183 9.703-9.183zm-21.828 36.3c-4.254 0-7.78 3.26-7.895 7.356h2.069c.112-2.92 2.637-5.288 5.826-5.288 3.19 0 5.712 2.368 5.824 5.288h2.068c-.113-4.095-3.64-7.356-7.892-7.356zm45.119 4.447c-4.585 0-8.38 3.56-8.38 7.998 0 4.44 3.795 8.006 8.38 8.006 4.586 0 8.379-3.567 8.379-8.006 0-4.438-3.793-7.998-8.38-7.998zm0 2.069c3.525 0 6.31 2.667 6.31 5.93 0 3.26-2.785 5.937-6.31 5.937-3.524 0-6.31-2.677-6.31-5.938 0-3.26 2.786-5.93 6.31-5.93z"/><path fill="#3c6eb4" d="M15.962 85.317v2.76h48.462c.12-.897.253-1.816.406-2.76zM40.516 95.66v2.752h71.664V95.66h-5.545l.01.076H63.453l.01-.076z"/><path d="M61.116 15.227h-.002c-4.982 0-9.83.544-12.955 1.783-8.283 3.043-14.528 11.225-16.385 21.076-1.652 7.815-2.09 14.424-2.969 20.408-.375 2.558-.838 4.995-1.496 7.377-3.361 2.655-5.775 6.766-6.658 11.45-.616 2.913-.957 5.54-1.254 7.996h2.078c.288-2.37.624-4.86 1.203-7.59l.008-.01v-.018c1.09-5.783 4.77-10.492 9.408-12.185l.018-.01.008-.008c1.573-.624 4.607-1.014 7.668-1.014 3.057 0 6.211.381 8.084 1.031 4.634 1.696 8.311 6.406 9.4 12.186v.018l.008.01c.58 2.73.915 5.221 1.203 7.59h2.079c-.297-2.458-.637-5.09-1.254-8.006-1.21-6.406-5.282-11.754-10.735-13.745h-.008l-.008-.01c-2.292-.796-5.55-1.14-8.77-1.142-3.214 0-6.328.333-8.419 1.16-.518.19-1.02.42-1.512.668a70.243 70.243 0 0 0 1-5.445c.895-6.102 1.315-12.633 2.934-20.287l.01-.01v-.016c1.736-9.24 7.606-16.806 15.086-19.544l.01-.008h.015c2.605-1.036 7.375-1.636 12.205-1.635 4.823 0 9.764.583 12.81 1.643 7.48 2.737 13.35 10.303 15.084 19.543l.01.02v.007c1.618 7.654 2.048 14.185 2.943 20.287.403 2.748.926 5.41 1.68 8.035-2.394-.724-5.604-1.05-8.795-1.05-3.43 0-6.747.36-8.966 1.238-5.794 2.12-10.125 7.8-11.416 14.619-1.136 5.358-1.438 9.879-2.036 13.943l2.051.303c.615-4.183.898-8.626 2-13.823l.01-.01v-.007c1.168-6.205 5.123-11.276 10.11-13.096h.007l.018-.01c1.7-.674 4.946-1.09 8.223-1.09 3.275 0 6.648.407 8.664 1.108h.01c4.977 1.826 8.922 6.89 10.09 13.088v.017c1.101 5.196 1.392 9.64 2.007 13.822l2.053-.302c-.597-4.065-.9-8.586-2.035-13.944-1.146-6.057-4.692-11.213-9.53-13.777-1.004-3.013-1.62-6.093-2.101-9.367-.877-5.98-1.312-12.584-2.961-20.39-1.854-9.868-8.103-18.074-16.402-21.112h-.018c-3.464-1.21-8.52-1.764-13.51-1.765zM45.546 27.69a6.912 6.912 0 0 0-5.506 2.684l-.633.814 1.646 1.264.631-.823a4.92 4.92 0 0 1 3.592-1.869c1.3-.055 2.65.468 3.574 1.385l.736.736 1.463-1.472-.736-.727a6.905 6.905 0 0 0-4.77-1.99zm33.372 0a6.905 6.905 0 0 0-4.77 1.992l-.736.727 1.455 1.472.737-.736a4.895 4.895 0 0 1 3.574-1.385c1.375.06 2.76.777 3.6 1.87l.633.822 1.636-1.264-.633-.814a6.895 6.895 0 0 0-5.496-2.684zm-33.425 9.115a5.17 5.306 0 0 0-5.168 5.305 5.17 5.306 0 0 0 5.168 5.306 5.17 5.306 0 0 0 5.175-5.306 5.17 5.306 0 0 0-5.175-5.305zm33.468 0a5.17 5.306 0 0 0-5.167 5.305 5.17 5.306 0 0 0 5.167 5.306 5.17 5.306 0 0 0 5.168-5.306 5.17 5.306 0 0 0-5.167-5.305zm-16.435 7.66c-.758 0-1.379.233-1.895.407-.517.175-.93.294-1.248.294-.567 0-1.124.311-1.427.676-.302.364-.445.74-.555 1.098-.22.713-.327 1.438-.424 1.69-.222.574-.01 1.031.166 1.331.175.3.389.536.63.78.484.486 1.096.973 1.714 1.427.633.464 1.268.886 1.74 1.194l-.025.416c-.233.19-.8.693-1.74 1.011-.556.188-1.116.255-1.602.131-.413-.106-.824-.47-1.246-1.021.027-.218.037-.307.086-.666.087-.628.213-1.387.27-1.612l-2.009-.502c-.12.48-.222 1.18-.312 1.829-.09.648-.156 1.203-.156 1.203l-.043.37.199.311c.729 1.146 1.701 1.841 2.701 2.096 1 .256 1.97.101 2.78-.172 1.05-.357 1.906-.93 2.378-1.29.473.36 1.324.935 2.371 1.29.81.274 1.77.428 2.77.172s1.973-.95 2.701-2.096l.2-.31-.044-.371s-.066-.555-.156-1.203c-.09-.65-.194-1.349-.312-1.829l-2.008.502c.056.225.182.984.27 1.612.048.354.06.44.085.658-.424.556-.83.923-1.246 1.03-.486.123-1.045.056-1.601-.132-.94-.318-1.508-.821-1.74-1.011l-.018-.389c.479-.31 1.128-.74 1.783-1.22.618-.455 1.23-.943 1.715-1.43.24-.243.456-.479.63-.778.177-.3.387-.757.165-1.332-.097-.25-.212-.976-.432-1.69-.11-.356-.242-.734-.545-1.099-.303-.364-.86-.674-1.428-.674-.317 0-.73-.12-1.246-.294-.517-.174-1.137-.407-1.896-.407zm0 2.069c.305 0 .71.118 1.23.293.478.162 1.079.34 1.764.373.023.035.085.15.148.355.111.36.224.91.38 1.445-.05.068-.11.153-.241.285-.342.344-.9.791-1.473 1.211-.88.647-1.43.984-1.808 1.221-.375-.236-.936-.57-1.819-1.22-.573-.42-1.12-.868-1.462-1.212-.132-.132-.19-.217-.24-.285.154-.535.268-1.084.378-1.445a1.55 1.55 0 0 1 .149-.355c.684-.032 1.277-.211 1.756-.373.518-.175.934-.293 1.238-.293zM29.584 70.369c-1.4.06-2.71.744-3.566 1.854l-.63.822 1.634 1.264.633-.824a2.803 2.803 0 0 1 2.025-1.047 2.777 2.777 0 0 1 2.008.779l.736.727 1.453-1.471-.736-.727a4.786 4.786 0 0 0-3.557-1.377zm21.838 0a4.767 4.767 0 0 0-3.55 1.377l-.735.727 1.453 1.47.737-.726a2.777 2.777 0 0 1 2.007-.78 2.8 2.8 0 0 1 2.026 1.048l.623.824 1.644-1.264-.632-.822a4.79 4.79 0 0 0-3.573-1.854zm45.604 3.912h-.002a5.046 5.046 0 0 0-3.487 1.456l-.736.726 1.455 1.47.734-.726a3.029 3.029 0 0 1 2.2-.847c.84.035 1.701.477 2.214 1.142l.633.822 1.637-1.263-.633-.822a5.022 5.022 0 0 0-3.758-1.95c-.085-.003-.17-.008-.257-.008zm-22.824 0c-.087 0-.173.004-.26.009a5.04 5.04 0 0 0-3.766 1.949l-.63.822 1.644 1.264.63-.823a3.035 3.035 0 0 1 2.208-1.142 3.048 3.048 0 0 1 2.207.847l.736.727 1.455-1.47-.736-.727a5.045 5.045 0 0 0-3.488-1.455zM29.8 76.559a3.307 3.386 0 0 0-3.306 3.384 3.307 3.386 0 0 0 3.306 3.393 3.307 3.386 0 0 0 3.306-3.393 3.307 3.386 0 0 0-3.306-3.384zm21.412 0a3.307 3.386 0 0 0-3.315 3.384 3.307 3.386 0 0 0 3.315 3.393 3.307 3.386 0 0 0 3.306-3.393 3.307 3.386 0 0 0-3.306-3.384zm22.953 4.276a3.536 3.62 0 0 0-3.53 3.617 3.536 3.62 0 0 0 3.53 3.618 3.536 3.62 0 0 0 3.54-3.618 3.536 3.62 0 0 0-3.54-3.617zm22.893 0a3.536 3.62 0 0 0-3.54 3.617 3.536 3.62 0 0 0 3.54 3.618 3.536 3.62 0 0 0 3.532-3.618 3.536 3.62 0 0 0-3.532-3.617zm-56.361.242c-.566 0-1.004.167-1.334.278-.33.11-.551.164-.674.164-.47 0-.957.276-1.203.572-.246.295-.347.58-.424.83-.156.503-.229.965-.26 1.047-.206.533-.01.94.13 1.178.038.066.08.115.12.172h3.16a11.125 11.125 0 0 1-.459-.32c-.358-.264-.707-.541-.9-.735v-.01c.063-.26.137-.572.182-.719.005-.016.004-.002.01-.015.366-.054.733-.127.976-.21.332-.111.562-.163.676-.163.113 0 .334.052.666.164.243.082.613.155.978.209.005.013.003 0 .008.015.046.147.128.457.19.72l-.008.009c-.193.194-.54.471-.899.734a15.49 15.49 0 0 1-.45.32h3.16c.04-.055.082-.106.119-.171.14-.238.337-.645.13-1.178-.03-.081-.113-.544-.27-1.047a2.198 2.198 0 0 0-.423-.83c-.246-.296-.723-.572-1.193-.572-.123 0-.346-.053-.676-.164-.33-.111-.766-.278-1.332-.278Zm45.119 4.657c-.59 0-1.05.176-1.403.295s-.597.18-.744.18c-.482 0-.976.275-1.23.58-.252.303-.359.602-.44.866-.164.528-.246 1.023-.285 1.125-.209.54-.006.95.137 1.194.144.246.31.42.486.598.353.353.781.688 1.211 1.003.355.26.701.496.996.694-.195.155-.454.367-.928.527-.34.115-.656.142-.908.078-.184-.047-.391-.261-.597-.492.016-.127.02-.135.043-.295.06-.425.145-.952.173-1.064l-2.007-.502c-.092.368-.155.834-.217 1.279-.062.447-.104.832-.104.832l-.043.363.2.313c.533.838 1.277 1.379 2.04 1.574.765.195 1.486.071 2.079-.129a6.1 6.1 0 0 0 1.523-.789c.358.252.887.573 1.524.79.593.2 1.312.323 2.076.128.765-.195 1.509-.736 2.043-1.574l.2-.313-.044-.363s-.051-.384-.113-.83c-.061-.446-.123-.913-.215-1.281l-2.008.502c.028.112.123.64.182 1.064.02.16.017.168.033.295-.205.23-.405.445-.588.492-.252.064-.57.037-.91-.078-.46-.156-.713-.364-.908-.52.3-.198.65-.436 1.013-.7.43-.316.858-.65 1.211-1.004a2.89 2.89 0 0 0 .485-.598c.144-.245.338-.655.13-1.194-.04-.102-.123-.597-.287-1.125-.08-.264-.18-.563-.431-.867-.254-.304-.747-.58-1.229-.58-.146 0-.39-.06-.744-.18-.353-.12-.812-.294-1.402-.294zm0 2.068c.137 0 .381.062.736.182a6.22 6.22 0 0 0 1.082.224c.013.028 0 .01.015.06.054.175.141.511.217.815l-.035.035a9.253 9.253 0 0 1-.969.795c-.505.37-.744.51-1.046.701-.3-.19-.54-.329-1.047-.7a9.251 9.251 0 0 1-.971-.796c-.022-.023-.014-.024-.033-.045.074-.298.154-.632.207-.804.016-.053.012-.033.025-.06a6.043 6.043 0 0 0 1.074-.225c.355-.12.607-.182.744-.182z"/><path fill="#892ca0" d="M45.491 35.775a6.084 6.084 0 0 0-4.382 1.866 6.361 6.361 0 0 0-1.535 2.595 6.388 6.388 0 0 0-.27 2.198 6.397 6.397 0 0 0 2.721 4.923 6.211 6.211 0 0 0 1.335.701 6.056 6.056 0 0 0 4.55-.11 6.095 6.095 0 0 0 1.531-.954 6.295 6.295 0 0 0 1.36-1.607 6.396 6.396 0 0 0 .826-4.236 6.431 6.431 0 0 0-.827-2.317 6.396 6.396 0 0 0-1.837-1.973 6.211 6.211 0 0 0-1.336-.7 6.047 6.047 0 0 0-2.134-.386zm33.47 0a6.107 6.107 0 0 0-2.132.389 6.075 6.075 0 0 0-1.577.878 6.277 6.277 0 0 0-1.43 1.538 6.396 6.396 0 0 0-.932 4.8 6.401 6.401 0 0 0 1.688 3.2 6.33 6.33 0 0 0 1.428 1.096 6.141 6.141 0 0 0 1.705.64 6.01 6.01 0 0 0 1.885.097 6.06 6.06 0 0 0 3.31-1.422 6.32 6.32 0 0 0 1.506-1.872 6.383 6.383 0 0 0 .715-3.652 6.431 6.431 0 0 0-.864-2.63 6.39 6.39 0 0 0-2.086-2.138 6.18 6.18 0 0 0-1.665-.722 6.021 6.021 0 0 0-1.55-.202zm-33.47 2.06h.002a4.315 4.315 0 0 1 .63.048 4.006 4.006 0 0 1 1.343.462 4.108 4.108 0 0 1 .956.732 4.226 4.226 0 0 1 .89 1.358 4.325 4.325 0 0 1 .321 1.453 4.547 4.547 0 0 1-.182 1.504 4.325 4.325 0 0 1-.761 1.45 4.226 4.226 0 0 1-1.224 1.035 4.069 4.069 0 0 1-2.603.46 4.056 4.056 0 0 1-2.562-1.497 4.252 4.252 0 0 1-.76-1.45 4.375 4.375 0 0 1-.186-1.28 4.54 4.54 0 0 1 .187-1.28 4.33 4.33 0 0 1 .76-1.449 4.218 4.218 0 0 1 1.22-1.034 4.062 4.062 0 0 1 1.757-.506c.07-.004.141-.005.212-.005zm33.47 0a4.088 4.088 0 0 1 1.23.191 4.036 4.036 0 0 1 1.4.779 4.19 4.19 0 0 1 1.008 1.258 4.3 4.3 0 0 1 .479 1.607 4.472 4.472 0 0 1-.48 2.489 4.28 4.28 0 0 1-1.007 1.258 4.146 4.146 0 0 1-1.02.636 4.033 4.033 0 0 1-3.218 0 4.068 4.068 0 0 1-1.315-.911 4.226 4.226 0 0 1-.888-1.358 4.326 4.326 0 0 1-.32-1.452 4.54 4.54 0 0 1 .079-1.09 4.372 4.372 0 0 1 .623-1.532 4.25 4.25 0 0 1 1.118-1.15 4.105 4.105 0 0 1 1.279-.591 4.035 4.035 0 0 1 1.032-.134zM29.688 75.527a1.39 1.39 0 0 0-.112.001c-2.295.12-4.111 2.074-4.111 4.414 0 2.416 1.937 4.423 4.336 4.423s4.344-2.007 4.344-4.423-1.945-4.414-4.344-4.414l-.113-.001zm21.413 0a1.415 1.415 0 0 0-.113.001c-2.295.12-4.12 2.074-4.12 4.414 0 2.416 1.946 4.423 4.345 4.423 2.4 0 4.336-2.007 4.336-4.423s-1.937-4.414-4.336-4.414l-.112-.001zm-21.3 2.07c1.254 0 2.275 1.021 2.275 2.345 0 1.324-1.021 2.354-2.275 2.354s-2.269-1.03-2.269-2.354 1.015-2.345 2.269-2.345zm21.412 0c1.254 0 2.268 1.021 2.268 2.345 0 1.324-1.014 2.354-2.268 2.354-1.254 0-2.276-1.03-2.276-2.354s1.022-2.345 2.276-2.345zm22.953 2.198c-2.525 0-4.57 2.111-4.57 4.656 0 2.546 2.045 4.657 4.57 4.657 2.526 0 4.57-2.11 4.57-4.657 0-2.545-2.044-4.656-4.57-4.656zm22.893 0c-2.525 0-4.57 2.111-4.57 4.656 0 2.546 2.045 4.657 4.57 4.657 2.526 0 4.57-2.11 4.57-4.657 0-2.545-2.044-4.656-4.57-4.656zm-22.957 2.068.065.001c1.38 0 2.5 1.134 2.5 2.587 0 1.454-1.12 2.588-2.5 2.588s-2.502-1.134-2.502-2.588c0-1.408 1.05-2.52 2.372-2.587a.761.761 0 0 1 .065 0zm22.892 0 .066.001c1.38 0 2.5 1.134 2.5 2.587 0 1.454-1.12 2.588-2.5 2.588s-2.502-1.134-2.502-2.588c0-1.408 1.05-2.52 2.372-2.587a.757.757 0 0 1 .064 0z"/><path fill="#fff" d="M43.77 37.973a2.543 2.644 0 0 0-2.545 2.64 2.543 2.644 0 0 0 2.545 2.65 2.543 2.644 0 0 0 2.545-2.65 2.543 2.644 0 0 0-2.545-2.64zm33.453 0a2.543 2.644 0 0 0-2.545 2.64 2.543 2.644 0 0 0 2.545 2.65 2.543 2.644 0 0 0 2.543-2.65 2.543 2.644 0 0 0-2.543-2.64zM28.7 77.303a1.626 1.687 0 0 0-1.625 1.687 1.626 1.687 0 0 0 1.627 1.688 1.626 1.687 0 0 0 1.627-1.688 1.626 1.687 0 0 0-1.627-1.687zm21.62.242a1.626 1.687 0 0 0-1.626 1.688 1.626 1.687 0 0 0 1.627 1.687 1.626 1.687 0 0 0 1.629-1.687 1.626 1.687 0 0 0-1.63-1.688zm22.67 4.086a1.739 1.804 0 0 0-1.74 1.799 1.739 1.804 0 0 0 1.74 1.808 1.739 1.804 0 0 0 1.74-1.808 1.739 1.804 0 0 0-1.74-1.799zm23.247.232a1.739 1.804 0 0 0-1.74 1.81 1.739 1.804 0 0 0 1.74 1.8 1.739 1.804 0 0 0 1.74-1.8 1.739 1.804 0 0 0-1.74-1.81z"/></svg></div></div>
+     <div class="mini" style="background:#dcebdc"><div class="mini-front"><b>GitOps</b><span>Declarative delivery</span></div><div class="mini-back" style="color:#15803d"><svg class="gitops-exact-logo" role="img" aria-label="GitOps logo" height="852" viewBox="-20.21 56.72 333.89 177.33" width="2500" xmlns="http://www.w3.org/2000/svg"><g fill="#0d2c40"><path d="m93.09 176.17 20.91 1.54v17.86s-39.07 38.48-96-7.08h19.4l2.15-17.55s22.14 22.47 53.54 5.23z"/><path d="m22.28 93.66s-42.49 39.56-7.7 90.21l19.42 1.85 1.85-18.78s-17.85-29.25 5.21-52.34l-20.68-1.6z"/><path d="m26.9 90.89s53-34.17 93.29 7.08l-17.86-1.23-1.85 20s-20.32-24.62-54.18-5.53l-20.63-.92z"/><path d="m105.1 121.68 1.23-20.63 18.78 1.85 56.65 63.11h-19.39l-1.85 17.55z"/></g><g fill="#02d35f"><path d="m98.33 172.79 71.73-79.13 19.09 1.85-1.23 19.4-70.5 78.5.3-20.32z"/><path d="m172.83 90.81 19.86 1.62-1.38 18.94s29.32-18.71 50.8 1.15l21 .92 1.89-18.44s-32.82-37-92.17-4.19z"/><path d="m245.11 115.52 21 1.23 1.62-18.55s45.95 51.19-3.7 95.21l-20.31-1.41 1.85-21s27.48-30.77-.46-55.48z"/><path d="m186.69 170.94-21.21-1.85-1.19 18.71s37.64 43.41 94.44 8.77l-19.4-1.57 1.85-20.09s-24.71 19.81-54.49-3.97z"/></g><path d="m213.53 138.6v7a3.77 3.77 0 0 0 -.09.83 3.86 3.86 0 0 0 .09.84v11.28h-5.24v-20z" fill="#0d2c40"/><path d="m218.14 138.6a8.32 8.32 0 0 0 -4.61 2.17 8 8 0 0 0 -3.07 5.67 8.53 8.53 0 0 0 3.07 6 6.79 6.79 0 0 0 4.09 1.85c4.87.12 7.27-4.07 7.27-7.84s-2.98-8.07-6.75-7.85zm-1.59 11.31a3.19 3.19 0 0 1 -3-2.63 3.86 3.86 0 0 1 -.09-.84 3.77 3.77 0 0 1 .09-.83 3.19 3.19 0 0 1 3-2.63 3.48 3.48 0 0 1 0 6.93zm18.76-5.34c-.76-.24-3.57-.68-3.57-1.74 0-.6.86-.67 1.28-.65 1.2 0 3 1.43 4 1.16.89-.23 1.67-2.53 2-3.31a12.77 12.77 0 0 0 -8.34-1.52 5 5 0 0 0 -3.77 6.6c1.27 3.29 5.17 2 7.14 4 .81.84-.86 1.22-1.41 1.2a11.85 11.85 0 0 1 -4.74-1.8c-.49.7-2 2.37-1.82 3.24s2.17 1.52 3 1.78c2.78.9 7.07 1.24 9.16-1.29 2.61-3.04.33-6.61-2.93-7.67zm-40.69-11.51a11 11 0 1 0 11 11 11 11 0 0 0 -11-11zm0 16.61a5.64 5.64 0 1 1 5.65-5.64 5.64 5.64 0 0 1 -5.66 5.64z" fill="#0d2c40"/><path d="m90.44 138.35h-6.27l6.63 17.34h2.86v-7.39zm6.45.03h6.27l-6.64 17.34h-2.86v-7.39zm-36.89-2.47a15.09 15.09 0 0 0 -7.1-2.62c-3.38-.32-7 .09-10.13.09v22.29h.15c.6.07 1.2.13 1.81.17a39.73 39.73 0 0 0 7.22-.06c4.59-.51 7.54-2 9.35-3.94a10.11 10.11 0 0 0 2.55-6.54v-.53-.28c-.04-3.17-.95-6.36-3.85-8.58zm-5.1 13.62c-1.89 1.06-4.19.8-6.27.8v-11.61c2.21 0 4.7-.29 6.64 1.07 3.22 2.27 3.1 7.78-.4 9.74zm26.52 1.74c-.51-.43-1.16-1.16-1.85-1.28-1.1-.15-2.47 1.33-3.69 1.45-1.9.19-3.27-1.12-4-2.7h11.56c0-3.2-.27-6.57-3-8.77-5.07-4.14-13.39-1.08-14.32 5.45-1 6.88 4.41 11.32 11 10.46a8.64 8.64 0 0 0 4.42-2c.45-.4 1.11-.95.78-1.6a3.72 3.72 0 0 0 -.9-1.01zm-3.69-5.67h-5.9a3 3 0 0 1 5.9 0z" fill="#02d35f"/></svg></div></div>
+     <div class="mini" style="background:#ece3f4"><div class="mini-front"><b>KVM</b><span>Open virtualization</span></div><div class="mini-back" style="color:#7c3aed"><?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="72" height="72" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M461.1 875.9L67 700.6v-453l394.1-145.2z" fill="#D1D3D3" /><path d="M461.1 875.9L957 690.6v-431L461.1 102.4z" fill="#E8EEEF" /><path d="M67 700.6l470 221 420-229L462.6 526z" fill="#B3B9BA" /><path d="M232.9 679.5L517 825.3l306-140 134 7.3-191-69.3z" fill="#6C8387" /><path d="M521.5 820.7L232.9 679.5V383.6l288.6 124.2z" fill="#37BBEF" /><path d="M521.5 820.7l257.9-141.2V384.8l-257.9 123z" fill="#2481BA" /><path d="M232.9 383.6l288.6 124.2 257.9-123-303.6-102.3z" fill="#3ED6FF" /></svg></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="journey">
+ <div class="wrap">
+  <div class="section-title"><h2>My open source journey</h2><p>The employers changed. The technical thread stayed consistent. Linux, automation, containers, Kubernetes and enterprise platform architecture.</p></div>
+  <div class="timeline">
+   <article class="job"><div class="period">MAY 2023 → PRESENT</div><div class="company">Red Hat</div><h3>Solutions Architect</h3><p>Enterprise solution architecture, proposals, demonstrations, workshops, RFP and RFI responses, BoQs and technical engagements around OpenShift, RHEL and hybrid cloud.</p><div class="tags"><span>OPENSHIFT</span><span>RHEL</span><span>ARCHITECTURE</span><span>POC</span></div></article>
+   <article class="job"><div class="period">OCT 2021 → MAY 2023</div><div class="company">Seamless</div><h3>Senior Systems Engineer</h3><p>Telecom workloads on ROSA and OpenShift with CI/CD, service mesh, SRE and observability practices.</p><div class="tags"><span>KUBERNETES</span><span>ISTIO</span><span>SRE</span><span>CICD</span></div></article>
+   <article class="job"><div class="period">MAR 2015 → OCT 2021</div><div class="company">Ericsson</div><h3>Senior Solution Integrator</h3><p>Kubernetes and Linux operations for large deployments with Shell, Python, Ansible and Jenkins automation.</p><div class="tags"><span>LINUX</span><span>ANSIBLE</span><span>PYTHON</span><span>KUBERNETES</span></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="section certs" id="credentials">
+ <div class="wrap">
+  <div class="section-title"><h2>Credentials</h2><p>Formal certifications supporting the technologies I work with.</p></div>
+  <div class="cert-grid">
+   <div class="cert"><div class="badge">RH</div><div><b>OpenShift Virtualization</b><span>Red Hat Certified Specialist</span></div></div>
+   <div class="cert"><div class="badge">RH</div><div><b>Containers</b><span>Red Hat Certified Specialist</span></div></div>
+   <div class="cert"><div class="badge">AWS</div><div><b>Solutions Architect Associate</b><span>Amazon Web Services</span></div></div>
+   <div class="cert"><div class="badge">AZ</div><div><b>Azure Fundamentals</b><span>Microsoft Certified</span></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="cta"><div class="wrap cta-in"><div><h2>Want to talk open infrastructure?</h2><p>Kubernetes, Linux, hybrid cloud, virtualization, platform engineering or open source architecture.</p></div><a class="btn primary" href="mailto:rebontadeb@gmail.com">Connect with me</a></div></section>
+</main>
+
+<footer><div class="wrap footer"><div class="logo"><span class="logo-mark">RD</span>Rebonta Deb</div><div class="footer-links"><a href="mailto:rebontadeb@gmail.com">Email</a><a href="https://linkedin.com/in/rebonta-deb" target="_blank" rel="noopener">LinkedIn</a><a href="#top">Top</a></div></div></footer>
+
+<script>
+function toggleTheme(){
+  const dark = document.body.classList.toggle('dark');
+  document.getElementById('themeIcon').textContent = dark ? '☀' : '☾';
+  document.getElementById('themeLabel').textContent = dark ? 'Light' : 'Dark';
+  localStorage.setItem('rd-theme', dark ? 'dark' : 'light');
+}
+(function(){
+  const saved = localStorage.getItem('rd-theme');
+  if(saved === 'dark'){
+    document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded',()=>{
+      const i = document.getElementById('themeIcon');
+      const l = document.getElementById('themeLabel');
+      if(i) i.textContent = '☀';
+      if(l) l.textContent = 'Light';
+    });
+  }
+})();
+const pins=[...document.querySelectorAll('.searchable')];
+const chips=[...document.querySelectorAll('[data-filter]')];
+function filterPins(q){
+ q=(q||'').toLowerCase().trim();
+ pins.forEach(p=>{
+  const hay=(p.textContent+' '+(p.dataset.tags||'')).toLowerCase();
+  p.style.display=(!q||q==='all'||hay.includes(q))?'inline-block':'none';
+ });
+}
+chips.forEach(c=>c.addEventListener('click',()=>{
+ chips.forEach(x=>x.classList.remove('active'));
+ c.classList.add('active');
+ filterPins(c.dataset.filter);
+}));
+document.getElementById('search').addEventListener('input',e=>{
+ chips.forEach(x=>x.classList.remove('active'));
+ filterPins(e.target.value);
+});
+</script>
+</body></html>
